@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Instructor>
+
+@{
+    ViewData["Title"] = "المدربين";
+    ViewData["activeNavbarItem"] = "instructors";
+}
+
+<div class="content-wrapper">
+    <div class="fading-bg px-2 pt-5 pb-3">
+        <div class="container">
+            <h1 class="mb-5">المدربين</h1>
+        </div>
+    </div>
+
+    <div class="fading-bg pb-5">
+        <div class="container">
+            @foreach (var instructor in Model)
+            {
+                <div class="p-3 bg-white border rounded-3 mb-3">
+                    <div class="d-flex flex-column flex-sm-row">
+                        <div class="d-flex">
+                            <img src="@(instructor.Gender == 'f' ? Href("~/img/female.jpg") : Href("~/img/male.jpg"))"
+                                 alt="Profile"
+                                 class="thumbnail rounded">
+
+                            <div class="d-flex align-items-center">
+                                <h4 class="d-sm-none ms-3 mb-0">@instructor.FullName</h4>
+                            </div>
+                        </div>
+
+                        <div class="ms-1 ms-sm-3 mt-3 mt-sm-0">
+                            <h4 class="mt-2 mb-3 d-none d-sm-block">
+                                @instructor.FullName
+                            </h4>
+
+                            <h5 class="mt-4">مؤهلاته</h5>
+                            @Html.Raw(instructor.Qualifications)
+
+                            <h5 class="mt-4">سنوات الخبرة</h5>
+                            <p>
+                                @instructor.ExperienceYears
+                            </p>
+
+                            <a asp-controller="Home" asp-action="InstructorDetails" asp-route-id="@instructor.Id"
+                               class="btn btn btn-primary">
+
+                                تفاصيل أكثر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

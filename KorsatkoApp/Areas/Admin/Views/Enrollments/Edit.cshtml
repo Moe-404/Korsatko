@@ -1,0 +1,29 @@
+﻿@model KorsatkoApp.Areas.Admin.Models.Enrollment
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EnrollmentNumber" class="control-label"></label>
+                <input asp-for="EnrollmentNumber" class="form-control" />
+                <span asp-validation-for="EnrollmentNumber" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="StudentId" />
+            <input type="hidden" asp-for="SessionId" />
+            <div class="form-group">
+                <label asp-for="PaymentStatus" class="control-label"></label>
+                <input asp-for="PaymentStatus" class="form-control" />
+                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Enrollment>
+
+@{
+    ViewData["Title"] = "مواعيدي";
+    Layout = "~/Views/Shared/_LoggedInLayout.cshtml";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/website/css/wave.css">
+}
+
+
+
+<div class="content-wrapper d-flex flex-column flex-grow-1">
+    <div class="wave header">
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave"
+                            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+
+        </div>
+    </div>
+
+    <div class="bg-white flex-grow-1">
+        <div class="container">
+            <h2 class="mt-3">مواعيدي</h2>
+
+            <div class="row pb-5">
+                @if (Model.Count() == 0) {
+                    <div class="my-3">
+                        <div class="alert alert-light d-flex flex-column align-items-center">
+                            <div class="fs-5 text-center my-3 text-muted">
+                                أنت غير مشترك في أي مواعيد.
+                            </div>
+
+                        </div>
+                    </div>
+                } else {   
+                @foreach(var item in Model)
+                {
+                    if (item.session == null)
+                    {
+                        continue;
+                    }
+
+                    Func<DateTime, string> dateFormatter = date => $"{date.Year:0000}-{date.Month:00}-{date.Day:00}";
+                        
+                    Func<DateTime, string> timeFormatter = time => {
+                        string ampm = (time.Hour < 12) ? "صباحاً" : "مساءً";
+                        return time.ToString("h:MM ") + ampm;
+                    };
+
+                    string dateStart = dateFormatter(item.session.StartDate);
+                    string dateEnd = dateFormatter(item.session.EndDate);
+                    string timeStart = timeFormatter(item.session.startTime);
+                    string timeEnd = timeFormatter(item.session.EndTime);
+
+
+                    <div class="col-12 col-lg-6 mt-3">
+                        <div class="card session-card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="m-3 d-none d-sm-block">
+                                        @if (item.session.course.Picture == "" || item.session.course.Picture == null) {
+                                            <img src="~/website/img/tracks/backend.svg" alt="@item.session.course.Name">
+                                        } else {
+                                            <img src="~/Uploads/@item.session.course.Picture" alt="@item.session.course.Name">
+                                        }
+                                    </div>
+
+                                    <div class="p-3 pb-0 flex-grow-1">
+                                        <h4 class="mb-3">@item.session.course?.Name</h4>
+
+                                        <table>
+                                            <tr>
+                                                <td class="title">المدرب</td>
+                                                <td class="info">@item.session.instructor?.FullName</td>
+                                            </tr>
+                                            @*<tr>
+                                                <td><i class="fa-solid fa-circle-dot pe-2"></i></td>
+                                                <td class="title">الأيام</td>
+                                                <td>@item.session?.Days</td>
+                                            </tr>*@
+                                            <tr>
+                                                <td class="title">المدة</td>
+                                                <td>
+                                                    من @dateStart
+                                                    <br class="d-inline d-sm-none d-lg-inline d-xl-none">
+                                                    إلى @dateEnd
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title">الوقت</td>
+                                                <td>
+                                                    من @timeStart
+                                                    <br class="d-inline d-sm-none d-lg-inline d-xl-none">
+                                                    إلى @timeEnd
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title">المكان</td>
+                                                <td>@item.session.Location</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="vertical-align: middle;" class="title">الحالة</td>
+                                                <td style="vertical-align: middle;">
+                                                    @if (item.PaymentStatus == "unpaid")
+                                                    {
+                                                        <div class="d-flex align-items-center">
+                                                            <span style="line-height: 1" class="me-2">
+                                                                غير مدفوع
+                                                            </span>
+
+                                                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                                                ادفع الآن
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                    else if (item.PaymentStatus == "paid")
+                                                    {
+                                                        <span>
+                                                            مدفوع
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@item.PaymentStatus</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

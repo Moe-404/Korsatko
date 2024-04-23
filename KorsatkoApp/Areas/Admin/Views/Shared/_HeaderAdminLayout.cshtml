@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "_AdminLayout";
+
+    string controller = Context?.GetRouteValue("Controller")?.ToString() ?? "Home";
+    string action = Context?.GetRouteValue("action")?.ToString() ?? "Index";
+
+    string controllerPlural = controller switch
+    {
+        "Courses" => "الكورسات",
+        "Enrollments" => "الإشتراكات",
+        "Instructors" => "المدربين",
+        "Sessions" => "المواعيد",
+        "Students" => "الطلاب",
+        _ => controller
+    };
+
+    string controllerSingular = controller switch
+    {
+        "Courses" => "كورس",
+        "Enrollments" => "إشتراك",
+        "Instructors" => "مدرب",
+        "Sessions" => "ميعاد",
+        "Students" => "طالب",
+        _ => controller
+    };
+
+    string actionSentence = action switch
+    {
+        "Index" => "عرض " + controllerPlural,
+        "Create" => "إضافة " + controllerSingular,
+        "Details" => "تفاصيل ال" + controllerSingular,
+        "Edit" => "تعديل " + controllerSingular,
+        "Delete" => "حذف " + controllerSingular,
+        _ => action + " " + controllerSingular
+    };
+
+    ViewData["title"] = action == "Index" ? controllerPlural : actionSentence;
+}
+
+<section class="container content-header mb-2">
+    <div class="px-3 px-sm-2 px-lg-3">
+        <div class="row mt-3 mb-1">
+            <h1 class="arabic">@actionSentence</h1>
+        </div>
+
+        <div class="row">
+            <ol class="breadcrumb arabic sm">
+                <li class="breadcrumb-item">
+                    @if (controller == "Home" && action == "Index")
+                    {
+                        @("الصفحة الرئيسية")
+                    }
+                    else
+                    {
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index">الصفحة الرئيسية</a>
+                    }
+                </li>
+
+
+                <li class="breadcrumb-item">
+                    @if (controller == "Home")
+                    {
+                        @("لوحة القيادة")
+                    }
+                    else if (action == "Index")
+                    {
+                        @controllerPlural
+                    }
+                    else
+                    {
+                        <a asp-area="Admin" asp-controller="@controller" asp-action="Index">@controllerPlural</a>
+                    }
+                </li>
+
+                @if (action != "Index")
+                {
+                    <li class="breadcrumb-item">
+                        @actionSentence
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+
+</section>
+
+<section class="content pb-5">
+    <div class="container">
+        @RenderBody()
+    </div>
+</section>
+
+@section Styles {
+    @await RenderSectionAsync("Styles", required: false)
+}
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}

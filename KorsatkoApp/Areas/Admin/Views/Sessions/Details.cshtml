@@ -1,0 +1,149 @@
+﻿@model Session
+
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<div class="card">
+    <div class="card-body arabic">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.course)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.course.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.instructor)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.instructor.FullName)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.startTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.startTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Location)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Limit)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Limit)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsAvailable)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PriceRate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PriceRate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AddedOn)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AddedOn)
+            </dd>
+
+        </dl>
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-3 arabic">تعديل</a>
+            <a asp-action="Index" class="btn btn-secondary px-3 arabic">رجوع</a>
+        </div>
+    </div>
+</div>
+
+<h2 class="arabic">الطلاب المسجلين في الموعد</h2>
+
+
+<!-- Main content -->
+<section class="content pb-5">
+    <div class="container">
+        <div class="card">
+            <div class="card-body arabic">
+                <div class="row">
+                    <div class="col-12 col-sm-8" id="tableButtons"></div>
+
+                    <div class="col-12 col-sm-4">
+                        <input type="text" id="search" class="form-control d-inline w-100 w-sm-auto float-left"
+                               placeholder="بحث">
+                    </div>
+                </div>
+
+                <table id="datatable" class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>الاسم بالكامل</th>
+                            <th>الرقم القومي</th>
+                            <th>تاريخ الميلاد</th>
+                            <th>النوع</th>
+                            <th>البريد الالكتروني</th>
+                            <th>رقم الهاتف</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Enrollments) {
+
+                            <tr>
+                                <td>@item.student.FullName</td>
+                                <td>@item.student.NationalId</td>
+                                <td>@item.student.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                                @if (item.student.Gender == 'f') {
+                                    <td>انثى</td>
+                                } else {
+                                    <td>ذكر</td>
+                                }
+                                <td>@item.student.Email</td>
+                                <td>@item.student.PhoneNumber</td>
+                                <td class="text-nowrap">
+                                    <a href="#" class="btn icon-btn-sm btn-outline-primary m-1">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn icon-btn-sm btn-outline-danger m-1">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+

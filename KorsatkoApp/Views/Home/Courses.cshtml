@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Student> SignInManager
+
+@model IEnumerable<Course>
+
+
+@{
+    Layout = SignInManager.IsSignedIn(User) ? "_LoggedInLayout" : "_Layout";
+    ViewBag.activeNavbarItem = "courses";
+}
+
+
+<div class="content-wrapper">
+    <div class="fading-bg pb-5">
+        <div class="container pb-3">
+            <div class="my-4">
+                <h4>الدورات التدريبية</h4>
+            </div>
+
+            <div class="cards-container mb-5 align-items-stretch">
+                @foreach (var c in Model)
+                {
+                    <div class="card card-fixed" style="width: 18rem;">
+                        <div class="card-image">
+                            @if (c.Picture == "" || c.Picture == null)
+                            {
+                                <img src="~/website/img/tracks/backend.svg" alt="@c.Name">
+                            }
+                            else
+                            {
+                                <img src="~/Uploads/@c.Picture" alt="@c.Name">
+                            }
+                        </div>
+
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="card-text">
+                                <h5 class="mb-3">@c.Name</h5>
+                                
+                                <h6>المتطلبات</h6>
+                                <p>
+                                    @c.Prerequisites
+                                </p>
+                                
+                                <h6>السعر</h6>
+                                <p>
+                                    @c.Price جنيه
+                                </p>
+                            </div>
+
+                            <a asp-action="CourseDetails" asp-route-id="@c.Id" class="btn btn-outline-primary">
+                                اشترك
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Enrollment>
+
+@{
+	Layout = "_DatatableAdminLayout";
+}
+
+@section TableHeader {
+	<tr>
+		<th>الطالب</th>
+		<th>الميعاد</th>
+		<th>حالة الدفع</th>
+		<th>تاريخ الإضافة</th>
+		<th></th>
+	</tr>
+}
+
+@section TableRows {
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.student.FullName)
+			</td>
+			<td>
+				@item.session.course.Name - @item.session.instructor.FullName - @item.session.Location
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.PaymentStatus)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.AddedOn)
+			</td>
+			<td class="text-nowrap">
+				<a asp-action="Details" asp-route-id="@item.EnrollmentNumber" class="btn icon-btn-sm btn-outline-primary m-1">
+					<i class="fas fa-info"></i>
+				</a>
+
+				<a asp-action="Delete" asp-route-id="@item.EnrollmentNumber" class="btn icon-btn-sm btn-outline-danger m-1">
+					<i class="fas fa-trash"></i>
+				</a>
+			</td>
+		</tr>
+	}
+}

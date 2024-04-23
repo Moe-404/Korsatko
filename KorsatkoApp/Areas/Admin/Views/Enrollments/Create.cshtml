@@ -1,0 +1,65 @@
+﻿@model Enrollment
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<form method="post" asp-action="Create" class="card">
+    <div class="card-body">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12 col-md-6  form-group">
+                <label asp-for="StudentId" class="control-label"></label>
+                <select asp-for="StudentId" class="form-control search-select" asp-items="ViewBag.StudentId"></select>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+                <label asp-for="SessionId" class="control-label"></label>
+                <select asp-for="SessionId" class="form-control search-select" asp-items="ViewBag.SessionId"></select>
+            </div>
+
+            <div class="col-12 col-md-6 form-group">
+                <label asp-for="PaymentStatus" class="control-label"></label>
+                <input asp-for="PaymentStatus" class="form-control" />
+                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <input type="submit" value="إضافة" class="btn btn-primary px-3 arabic">
+            <a asp-action="Index" class="btn btn-outline-danger px-3 arabic">إلغاء</a>
+        </div>
+    </div>
+
+</form>
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/admin/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="~/admin/plugins/jquery-ui/jquery-ui.min.css">
+}
+
+
+@section Scripts {
+    <script src="~/admin/plugins/select2/js/select2.full.min.js"></script>
+    <script src="~/admin/plugins/select2/js/i18n/ar.js"></script>
+
+    <script>
+        $("document").ready(() => {
+            $(".search-select").select2({
+                dir: "rtl",
+                width: "100%",
+                theme: "bootstrap4",
+                containerCssClass: "arabic",
+                dropdownCssClass: "arabic",
+            });
+        });
+    </script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+}

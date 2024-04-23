@@ -1,0 +1,265 @@
+﻿@using KorsatkoApp.ViewModels;
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<Student> SignInManager
+@inject UserManager<Student> UserManager
+
+@model HomeViewModel
+
+@{
+    Layout = SignInManager.IsSignedIn(User) ? "_LoggedInLayout" : "_Layout";
+    ViewBag.activeNavbarItem = "home";
+}
+
+<div class="content-wrapper">
+    <div class="fading-bg">
+        <div class="container pt-0 pt-md-5 pb-5">
+            <div class="row py-5 flex-column-reverse flex-md-row">
+                <div class="col-12 col-md-6 hero-text">
+                    <div class="heading text-center text-md-start mt-5 mt-md-0">
+                        تعلم البرمجة باحترافية
+                    </div>
+                    <div class="subheading">
+                        احترف البرمجة بمختلف مجالاتها من خلال دورات ومسارات كورساتكو الاحترافية للحصول على دخل ممتاز
+                        وفرص عمل حول العالم
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 hero-image">
+                    <div class="brand-full">
+                        <div class="top">
+                            <img src="/img/k-logo-t.png">
+                            <span>orsatko</span>
+                        </div>
+                        <div class="bottom">
+                            كــورســـــــاتكو
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-sm-5">
+                <div class="hero-call-to-action">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-area="" asp-action="Courses" asp-controller="Home" class="btn bg-primary-gradient glow-on-hover">
+                            ابدا مشوارك الإحترافي
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn bg-primary-gradient glow-on-hover">
+                            ابدا مشوارك الإحترافي
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fading-bg pb-5">
+        <div class="container py-5">
+            <div class="mt-5 mb-4">
+                <h4>الدورات الموصى بها</h4>
+            </div>
+
+			<div class="cards-container mb-5">
+				@foreach (var c in Model.courses)
+				{
+					<a asp-action="CourseDetails" asp-route-id="@c.Id" class="card card-fixed scale-on-hover">
+						<div class="card-image">
+							@if (c.Picture == "" || c.Picture == null)
+							{
+								<img src="~/website/img/tracks/backend.svg" alt="@c.Name">
+							}
+							else
+							{
+								<img src="~/Uploads/@c.Picture" alt="@c.Name">
+							}
+						</div>
+
+						<div class="card-body">
+							<div class="card-title">
+								@c.Name
+							</div>
+						</div>
+					</a>
+				}
+            </div>
+
+
+			<div class="mt-5 pt-5 mb-4">
+				<h4>مدربين متميزين</h4>
+			</div>
+
+			<div class="cards-container mb-5">
+
+				@foreach (var c in Model.instructors)
+				{
+					@* Card1 *@
+					<a asp-action="InstructorDetails" asp-route-id="@c.Id" class="card card-fixed scale-on-hover">
+						<div class="card-image">
+							@if (c.Gender == 'm' || c.Gender == null)
+							{
+								<img src="~/img/male.jpg" alt="Male">
+							}
+							else
+							{
+								<img src="~/img/female.jpg" alt="Female">
+							}
+						</div>
+
+						<div class="card-body">
+							<div class="card-title">
+								@c.FullName
+							</div>
+						</div>
+					</a>
+					@* Card1 *@
+				}
+			</div>
+
+
+
+            <div class="mt-5 pt-5 mb-4">
+                <h4>إنجازات كورساتكو</h4>
+            </div>
+
+            <div class="all">
+                <div class="timeline">
+                    <div class="center-line"></div>
+
+                    <div class="container-achi left-container">
+                        <img src="~/website/img/achie-img/success.png">
+                        <div class="text-box">
+                            <h4>جائزة أفضل برنامج تدريبي</h4>
+                            <small>2022-2023</small>
+                            <p>
+                                فاز كورساتكو في مسابقة أفضل برنامج تدريبي على مستوى جمهورية مصر العربية
+                                بالمرتبة الأولى.
+                            </p>
+                            <span class="left-container-arrow"></span>
+                        </div>
+                    </div>
+                    <div class="container-achi right-container">
+                        <img src="~/website/img/achie-img/growth.png">
+                        <div class="text-box">
+                            <h4>آلاف المتدربين</h4>
+                            <small>2022-2023</small>
+                            <p>
+                                تم تدريب ما يعادل خمسة آلاف متدرب ليكونوا خبراء ومتمكنين في مجالاتهم ومازال العدد في
+                                تزايد.
+                            </p>
+                            <span class="right-container-arrow"></span>
+                        </div>
+                    </div>
+                    <div class="container-achi left-container">
+						<img src="~/website/img/achie-img/success (1).png">
+                        <div class="text-box">
+                            <h4> إمتياز متدربينا</h4>
+                            <small>2022-2023</small>
+                            <p>أغلب متدربينا بعد الإنتهاء من الدورة في مجال معين يتم توظيفه من قبل شركات كبيرة </p>
+                            <span class="left-container-arrow"></span>
+                        </div>
+                    </div>
+                    <div class="container-achi right-container">
+						<img src="~/website/img/achie-img/badge.png">
+                        <div class="text-box">
+                            <h4> وسام الإعتماد</h4>
+                            <small>2022-2023</small>
+                            <p>
+                                إستلم كورساتكو وسام الإعتماد من وزارة التربية والتعليم لتميزها في المواد التدريبيه
+                                وشموليتها في المواضيع وكثرة التدريب العملي
+                            </p>
+                            <span class="right-container-arrow"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            
+
+            <div class="mt-5 pt-5 mb-4">
+                <h4>آراء متدربين سابقين</h4>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                                         class="rounded-circle img-fluid" />
+                                </div>
+
+                                <h4 class="ms-3">رضا شكري</h4>
+                            </div>
+
+                            <hr />
+
+                            <div class="mt-4 d-flex">
+                                <i class="fas fa-quote-left pe-2"></i>
+
+                                <span class="">
+                                    المنصة الإلكترونية سهلة الاستخدام وتفاعلية وجذابة. لقد تعلمت الكثير من كورساتكو
+                                    وأشعر بالثقة في التقدم لوظيفة أحلامي كمطور برامج.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                                         class="rounded-circle img-fluid" />
+                                </div>
+                                <h4 class="ms-3">نهاد نبيل</h4>
+                            </div>
+
+                            <hr />
+
+                            <div class="mt-4 d-flex">
+                                <i class="fas fa-quote-left pe-2"></i>
+
+                                <span class="text-start">
+                                    كورساتكو هو أفضل مركز تدريب على البرمجة حضرته على الإطلاق. المدربون كانوا على
+                                    دراية وودودون وصبورون، والمناهج الدراسية حديثة ومصممة بشكل جيد.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-0 d-flex align-items-stretch">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
+                                         class="rounded-circle img-fluid" />
+                                </div>
+                                <h4 class="ms-3">مخلص خليل</h4>
+                            </div>
+                            <hr />
+                            <div class="mt-4 d-flex">
+                                <i class="fas fa-quote-left pe-2"></i>
+
+                                <span class="text-start">
+                                    لقد تعلمت الكثير من الدورات والمشاريع، واستمتعت بالعمل مع الطلاب الآخرين الذين
+                                    يشاركونني شغفي بالبرمجة.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

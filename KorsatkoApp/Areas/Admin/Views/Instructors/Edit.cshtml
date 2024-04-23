@@ -1,0 +1,142 @@
+﻿@model Instructor
+
+@{
+	ViewData["Title"] = "تعديل مدرب";
+}
+
+<section class="container content-header mb-2">
+	<div class="px-3 px-sm-2 px-lg-3">
+		<div class="row mt-3 mb-1">
+			<h1 class="arabic">تعديل مدرب</h1>
+		</div>
+
+		<div class="row">
+			<ol class="breadcrumb arabic sm">
+				<li class="breadcrumb-item">
+					<a asp-area="Admin" asp-controller="home" asp-action="Index">الصفحة الرئيسية</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a asp-area="Admin" asp-controller="courses" asp-action="Index">المدربين</a>
+				</li>
+				<li class="breadcrumb-item">
+					تعديل مدرب
+				</li>
+			</ol>
+		</div>
+	</div>
+
+</section>
+<section class="content pb-5">
+	<div class="container">
+		<form method="post" asp-action="Edit" class="card">
+			<div class="card-body">
+				<div class="row">
+
+					<div class="col-12 col-md-6 form-group">
+						<label for="fullName">
+							<span class="arabic">الاسم بالكامل</span>
+						</label>
+						<span asp-validation-for="FullName" class="text-danger"></span>
+						<input asp-for="FullName" type="text" name="fullName" class="form-control arabic">
+					</div>
+
+
+					<div class="col-12 col-md-6 form-group">
+						<label for="nationalId">
+							<span class="arabic">الرقم القومي</span>
+						</label>
+						<span asp-validation-for="NationalId" class="text-danger"></span>
+						<input asp-for="NationalId" type="text" name="nationalId" class="form-control arabic">
+					</div>
+
+					<div class="col-12 col-md-6 form-group">
+						<label>
+							<span class="arabic">النوع</span>
+						</label>
+						<span asp-validation-for="Gender" class="text-danger"></span>
+						@Html.DropDownListFor(m => m.Gender, ViewBag.GenderOptions as SelectList, "اختار النوع", new { @class = "form-control" })
+					</div>
+
+					<div class="col-12 col-md-6 form-group">
+						<label for="email">
+							<span class="arabic">البريد الالكتروني</span>
+						</label>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="fas fa-envelope"></i>
+								</span>
+							</div>
+							<span asp-validation-for="Email" class="text-danger"></span>
+							<input asp-for="Email" type="text" name="email" class="form-control arabic">
+
+						</div>
+					</div>
+					<div class="col-12 col-md-6 form-group">
+						<label for="email">
+							<span class="arabic">المؤهلات</span>
+						</label>
+
+						<div class="input-group">
+							<span asp-validation-for="Qualifications" class="text-danger"></span>
+							<input asp-for="Qualifications" type="text" name="qualifications" class="form-control arabic">
+
+						</div>
+					</div>
+
+					<div class="col-12 col-md-6 form-group">
+						<label for="phoneNumber">
+							<span class="arabic">رقم الهاتف</span>
+						</label>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">
+									<i class="fas fa-phone"></i>
+								</span>
+							</div>
+							<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+							<input asp-for="PhoneNumber" type="text" name="phoneNumber" class="form-control arabic">
+						</div>
+					</div>
+					<div class="col-12 col-md-6 form-group">
+						<label for="phoneNumber">
+							<span class="arabic">سنوات الخبرة</span>
+						</label>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+							</div>
+							<span asp-validation-for="ExperienceYears" class="text-danger"></span>
+							<input asp-for="ExperienceYears" type="number" name="experienceyears" class="form-control arabic">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-footer">
+				<div class="">
+					<input type="submit" value="تعديل" class="btn btn-primary px-3 arabic">
+					<a asp-action="Index" class="btn btn-outline-danger px-3 arabic">إلغاء</a>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</section>
+
+@section Scripts {
+	<!-- jQuery -->
+	<script src="/plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- overlayScrollbars -->
+	<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/plugins/adminlte/js/adminlte.min.js"></script>
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

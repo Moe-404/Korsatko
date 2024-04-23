@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Course>
+
+@{
+	Layout = "_DatatableAdminLayout";
+}
+
+@section TableHeader {
+    <tr>
+        <th>اسم الكورس</th>
+        <th>محتوى الكورس</th>
+        <th>متطلبات الكورس</th>
+        <th>سعر الكورس</th>
+        <th></th>
+    </tr>
+}
+
+@section TableRows {
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>@item.Name</td>
+			<td>@item.Description</td>
+			<td>@item.Prerequisites</td>
+			<td>@item.Price</td>
+
+			<td class="text-nowrap">
+				<a asp-action="Details" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+					<i class="fas fa-info"></i>
+				</a>
+
+				<a asp-action="Edit" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+					<i class="fas fa-edit"></i>
+				</a>
+
+				<a asp-action="Delete" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-danger m-1">
+					<i class="fas fa-trash"></i>
+				</a>
+
+			</td>
+		</tr>
+	}
+}

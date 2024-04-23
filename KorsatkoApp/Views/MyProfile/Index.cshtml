@@ -1,0 +1,92 @@
+﻿@model Student
+
+
+@{
+    Layout = "_LoggedInLayout";
+    ViewData["title"] = "صفحتي الشخصية";
+
+
+    var profileHref = Model.Gender switch
+    {
+        'm' => Href("~/website/img/profile/1.jpg"),
+        'f' => Href("~/website/img/profile/2.jpg"),
+        _ => Href("~/website/img/profile/1.jpg")
+    };
+}
+
+
+<div class="content-wrapper">
+    <div class="fading-bg container-fluid pt-3 pb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5 col-xxl-4 mt-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row my-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <img src="@profileHref" class="col-3 profile-lg">
+                                    <h3 class="mt-3">صفحتي الشخصية</h3>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5 mb-4">
+                                <h5 class="border-bottom pb-2">
+                                    تفاصيل الحساب
+                                </h5>
+
+                                <div class="col-12 col-sm-6 mt-2">
+                                    <div class="fw-bold">اسم المستخدم</div>
+                                    <p class="ltr-right ">
+                                        @Model.UserName
+                                    </p>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-6 mt-2">
+                                    <div class="fw-bold">البريد الاكتروني</div>
+                                    <p class="ltr-right ">
+                                        @Model.Email
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <div class="row my-4" id="personalInformation">
+                                <h5 class="border-bottom pb-2">
+                                    البيانات الشخصية
+                                </h5>
+
+                                <div class="form-group col-12 mt-2">
+                                    <div class="fw-bold">الاسم</div>
+                                    <p>
+                                        @Model.FullName
+                                    </p>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-5 mt-2">
+                                    <div class="fw-bold">الرقم القومي</div>
+                                    <p class="ltr-right">
+                                        @Model.NationalId
+                                    </p>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-3 mt-2">
+                                    <div class="fw-bold">النوع</div>
+                                    <p>
+                                        @(Model.Gender == 'm' ? "ذكر" : (Model.Gender == 'f' ? "أنثى" : ""))
+                                    </p>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-4 mt-2">
+                                    <div class="fw-bold">تاريخ الميلاد</div>
+                                    <p class="ltr-right ">
+                                        @Model.DateOfBirth.ToString("dd/MM/yyyy")
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

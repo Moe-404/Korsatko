@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Session>
+
+@{
+    Layout = "_DatatableAdminLayout";
+}
+
+@section TableHeader {
+    <tr>
+        <th>اسم المدرب</th>
+        <th>اسم الكورس</th>
+        <th>المكان</th>
+        <th>تاريخ البداية</th>
+        <th>تاريخ النهاية</th>
+        <th>نسبة السعر</th>
+        <th>اقصى حد</th>
+        <th>ميعاد البداية</th>
+        <th>ميعاد النهاية</th>
+        <th>هل متاح</th>
+        <th>تاريخ الأضافة</th>
+        <th></th>
+    </tr>
+}
+
+@section TableRows {
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>@item.instructor.FullName</td>
+            <td>@item.course.Name</td>
+            <td>@item.Location</td>
+            <td>@item.StartDate.ToString("dd/MM/yyyy")</td>
+            <td>@item.EndDate.ToString("dd/MM/yyyy")</td>
+            <td>@item.PriceRate x</td>
+            <td>@item.Limit</td>
+            <td>@item.startTime.ToString("HH:mm")</td>
+            <td>@item.EndTime.ToString("HH:mm")</td>
+            <td>@item.IsAvailable</td>
+            <td>@item.AddedOn</td>
+
+            <td class="text-nowrap">
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+                    <i class="fas fa-info"></i>
+                </a>
+
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-danger m-1">
+                    <i class="fas fa-trash"></i>
+                </a>
+
+            </td>
+        </tr>
+    }
+}

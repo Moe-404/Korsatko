@@ -1,0 +1,62 @@
+﻿@model CourseViewModel
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<div class="card">
+    <div class="card-body arabic">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                <img src="~/Uploads/@Model.ExistingImage" class="img-fluid" asp-append-version="true">
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-6 col-lg-7">
+                <dl class="row">
+                    <dt class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Prerequisites)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.Prerequisites)
+                    </dd>
+                    <dd class="col-lg-10">
+
+                    </dd>
+                    <dt class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    <dt class="col-lg-3">
+                        @Html.DisplayNameFor(model => model.AddedOn)
+                    </dt>
+                    <dd class="col-lg-10">
+                        @Html.DisplayFor(model => model.AddedOn)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-3 arabic">تعديل</a>
+            <a asp-action="Index" class="btn btn-secondary px-3 arabic">رجوع</a>
+        </div>
+    </div>
+</div>

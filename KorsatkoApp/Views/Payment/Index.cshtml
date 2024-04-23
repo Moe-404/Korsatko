@@ -1,0 +1,70 @@
+﻿@{
+	Layout = "_LoggedInLayout";
+}
+<div class="content-wrapper m-5">
+	<div class="container">
+		<div class="card">
+			<h2 class="m-3">تأكيد عملية الدفع</h2>
+			<div class="card-body">
+				<form class="form-control">
+					<label class="mt-3 mb-1">الاسم المسجل على البطاقة</label>
+					<div class="">
+						<input type="text">
+					</div>
+					<label class="mt-3">رقم البطاقة</label>
+					<div>
+						<input class="me-3" type="text">
+						<img href="" src="img/pay/mc.png" height="45px">
+						<img href="" src="img/pay/vi.png" height="45px">
+						<img href="" src="img/pay/miz.jpg" height="45px" class="rounded-3">
+
+					</div>
+					<label class="mt-3 mb-1">CCV</label>
+					<div>
+						<input type="password">
+					</div>
+					<label class="mt-3 mb-2">تاريخ الإنتهاء</label>
+					<div>
+						<select>
+							<option value="Jan">يناير</option>
+							<option value="feb">فبراير</option>
+							<option value="Mar">مارس</option>
+							<option value="april">ابريل</option>
+							<option value="may">مايو</option>
+							<option value="june">يوليو</option>
+							<option value="July">يونيو</option>
+							<option value="Aug">اغسطس</option>
+							<option value="sep">سبتمر</option>
+							<option value="oct">اكتوبر</option>
+							<option value="Nov">نوفمبر</option>
+							<option value="Dec">ديسمبر</option>
+						</select>
+						<select>
+							<option value="2023">2023</option>
+							<option value="2024">2024</option>
+							<option value="2025">2025</option>
+							<option value="2026">2026</option>
+							<option value="2027">2027</option>
+							<option value="2028">2028</option>
+							<option value="2029">2029</option>
+							<option value="2030">2030</option>
+							<option value="2031">2031</option>
+							<option value="2032">2032</option>
+							<option value="2032">2033</option>
+							<option value="2032">2034</option>
+						</select>
+					</div>
+
+				</form>
+				<div class="mt-3 ">
+					<input type="checkbox">
+					<label>تذكر البطاقة في عمليات الشراء المستقبلية</label>
+				</div>
+			</div>
+			<div class="card-footer">
+				<a class="btn btn-primary">تأكيد</a>
+				<a class="btn btn-danger">إلغاء</a>
+			</div>
+		</div>
+	</div>
+</div>

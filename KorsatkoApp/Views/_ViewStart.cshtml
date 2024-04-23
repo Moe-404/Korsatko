@@ -1,0 +1,9 @@
+﻿@using KorsatkoApp.ViewModels;
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<Student> SignInManager
+@inject UserManager<Student> UserManager
+
+@{
+    Layout = SignInManager.IsSignedIn(User) ? "_LoggedInLayout" : "_Layout";
+}

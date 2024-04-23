@@ -1,0 +1,116 @@
+﻿@model KorsatkoApp.Areas.Admin.Models.Course
+
+@using KorsatkoApp.ViewModels;
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<Student> SignInManager
+@inject UserManager<Student> UserManager
+
+@{
+	ViewData["Title"] = "تفاصبل دورة " + Model.Name;
+}
+
+<div class="content-wrapper">
+	<div class="fading-bg px-2 pt-5 pb-3">
+		<div class="container">
+			<h1 class="mb-5">معلومات عن دورة @Model.Name</h1>
+
+			<h2 class="mt-4">عن الدورة التدريبية</h2>
+			@Html.Raw(Model.Description)
+
+			<h4 class="mt-4">متطلبات الدورة التدريبية</h4>
+			<p>@Model.Prerequisites</p>
+		</div>
+	</div>
+
+	<div class="fading-bg pb-5">
+		<div class="container">
+			<h2 class="">المدربين</h2>
+
+			@foreach (var sessionUniqueByInstructor in Model.Sessions.DistinctBy(e => e.instructor)) {
+				var instructor = sessionUniqueByInstructor.instructor;
+
+				if (instructor == null) {
+					continue;
+				}
+
+
+				<div class="p-3 bg-white border rounded-3 my-3">
+					<div class="d-flex flex-column flex-sm-row">
+						<div class="d-flex">
+							<img src="@(instructor.Gender == 'f' ? Href("~/img/female.jpg") : Href("~/img/male.jpg"))"
+								 alt="Profile"
+								 class="thumbnail rounded">
+
+							<div class="d-flex align-items-center">
+								<h4 class="d-sm-none ms-3 mb-0">@instructor.FullName</h4>
+							</div>
+						</div>
+
+						<div class="ms-1 ms-sm-3 mt-3 mt-sm-0">
+							<h4 class="mt-2 mb-3 d-none d-sm-block">
+								@instructor.FullName
+							</h4>
+
+							<h5 class="mt-4">مؤهلاته</h5>
+							@Html.Raw(instructor.Qualifications)
+
+							<h5 class="mt-4">سنوات الخبرة</h5>
+							<p>
+								@instructor.ExperienceYears
+							</p>
+
+							<a asp-controller="Home" asp-action="InstructorDetails" asp-route-id="@instructor.Id"
+							   class="btn btn-sm btn-secondary">
+
+								تفاصيل أكثر
+							</a>
+						</div>
+					</div>
+				</div>
+			}
+
+
+			<h2 class="pt-4 pb-4">المواعيد</h2>
+
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table table-head-fixed table-hover" style="min-width: 25rem; overflow-x: scroll">
+						<thead>
+							<tr>
+								<th>المدرب</th>
+								<th>المدة</th>
+								<th>الوقت</th>
+								<th>المكان</th>
+								<th>السعر</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var session in Model.Sessions) {
+								<tr>
+									<td>@session.instructor.FullName</td>
+									<td>
+										من @session.StartDate.ToString("yyyy-MM-dd")
+										<br>
+										إلى @session.EndDate.ToString("yyyy-MM-dd")
+									</td>
+									<td>
+										من @session.startTime.ToString("h:mm") @(session.startTime.ToString("tt") == "AM" ? "صباحاً" : "مساءً")
+										<br>
+										إلى @session.EndTime.ToString("h:mm") @(session.EndTime.ToString("tt") == "AM" ? "صباحاً" : "مساءً")
+									</td>
+									<td>@session.Location</td>
+									<td>@((int)(session.PriceRate * Model.Price)) جنيه</td>
+									<td>
+										<a asp-area="" asp-controller="Payment" asp-action="Index" class="btn btn-primary">إختيار</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

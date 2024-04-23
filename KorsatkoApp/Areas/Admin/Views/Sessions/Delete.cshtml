@@ -1,0 +1,88 @@
+﻿@model Session
+
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+
+<div class="card">
+<div class="card-body arabic">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.course.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.instructor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.instructor.FullName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Limit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Limit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PriceRate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PriceRate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AddedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AddedOn)
+        </dd>
+
+    </dl>
+</div>
+
+<form asp-action="Delete" class="card-footer">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="حذف" class="btn btn-danger px-3 arabic" />
+        <a asp-action="Index" class="btn btn-secondary px-3 arabic">رجوع</a>
+    </form>
+</div>

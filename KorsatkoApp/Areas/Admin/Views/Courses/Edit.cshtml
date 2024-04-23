@@ -1,0 +1,108 @@
+﻿@model CourseViewModel
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<form asp-action="Edit" enctype="multipart/form-data" class="card" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 form-group">
+                <label asp-for="Name">
+                    <span class="arabic">اسم الكورس</span>
+                </label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" type="text" class="form-control arabic">
+            </div>
+
+            <div class="col-12 form-group">
+                <label asp-for="Description">
+                    <span class="arabic">محتوى الكورس</span>
+                </label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+
+                <textarea asp-for="Description" class="form-control arabic"></textarea>
+            </div>
+
+            <div class="col-12 form-group">
+                <label asp-for="Prerequisites">
+                    <span class="arabic">متطلبات الكورس</span>
+                </label>
+                <span asp-validation-for="Prerequisites" class="text-danger"></span>
+                <input asp-for="Prerequisites" type="text" class="form-control arabic">
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="CoursePicture" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="CoursePicture" class="custom-file-input" />
+                        <label class="custom-file-label" for="customFile">@Model.ExistingImage</label>
+                    </div>
+                    <span asp-validation-for="CoursePicture" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-6 form-group">
+                <label asp-for="Price">
+                    <span class="arabic">سعر الكورس</span>
+                </label>
+                <span asp-validation-for="Price" class="text-danger"></span>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            EGP
+                        </span>
+                    </div>
+
+                    <input asp-for="Price" type="number" 
+                           class="form-control arabic" placeholder="1000">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <input type="submit" value="تعديل" class="btn btn-primary px-3 arabic">
+            <a asp-action="Index" class="btn btn-outline-danger px-3 arabic">إلغاء</a>
+        </div>
+    </div>
+
+</form>
+
+@section Styles {
+    <link href="~/admin/plugins/summernote/summernote-bs4.min.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="~/admin/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="~/admin/plugins/summernote/lang/summernote-ar-AR.min.js"></script>
+
+    <script>
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+        $("document").ready(function () {
+            $('#@Html.NameFor(m => m.Description)').summernote({
+                lang: "ar-AR",
+                height: 100,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['fontsize', ['fontsize']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+            });
+        });
+    </script>
+
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

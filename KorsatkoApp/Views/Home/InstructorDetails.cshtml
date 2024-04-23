@@ -1,0 +1,40 @@
+﻿@model KorsatkoApp.Areas.Admin.Models.Instructor
+
+@{
+    ViewData["Title"] = "InstructorDetails";
+}
+
+
+@{
+    ViewData["Title"] = "المدرب " + Model.FullName;
+}
+
+<div class="content-wrapper">
+    <div class="fading-bg px-2 pt-5 pb-5">
+        <div class="container pb-5">
+            <h1 class="mb-4">المدرب @Model.FullName</h1>
+
+            <img src="@(Model.Gender == 'f' ? Href("~/img/female.jpg") : Href("~/img/male.jpg"))"
+                 alt="Profile"
+                 class="thumbnail rounded mb-4">
+
+            <h2 class="mt-4">المؤهلات والخبرات</h2>
+            @Html.Raw(Model.Qualifications)
+
+            <h4 class="mt-4 mb-3">للتواصل مع المدرب</h4>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold pe-3">البريد الإلكتروني</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold pe-3">رقم الهاتف</td>
+                        <td>@Model.PhoneNumber</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

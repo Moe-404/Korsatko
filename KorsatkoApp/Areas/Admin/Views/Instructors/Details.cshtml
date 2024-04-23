@@ -1,0 +1,62 @@
+﻿@model Instructor
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<div class="card">
+    <div class="card-body arabic">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ExperienceYears)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ExperienceYears)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Qualifications)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Qualifications)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FullName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NationalId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NationalId)
+            </dd>
+
+        </dl>
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-3 arabic">تعديل</a>
+            <a asp-action="Index" class="btn btn-secondary px-3 arabic">رجوع</a>
+        </div>
+    </div>
+</div>

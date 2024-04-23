@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Student> SignInManager
+
+
+<nav class="navbar navbar-expand-md mx-sm-3">
+    <div class="d-flex w-100 justify-content-between container-fluid">
+        <a href="/" class="navbar-brand">
+            <div class="brand-container drop-shadow">
+                <img src="~/website/img/k-logo-t.png" alt="Korsatko" height="28">
+            </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse me-auto mb-2 mb-md-0" id="mainNav">
+            <div class="w-100 d-md-flex justify-content-between">
+                <div class="">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index"
+                               class="nav-link @(ViewBag.activeNavbarItem == "home" ? "active" : "")">
+                                الصفحة الرئيسية
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Courses"
+                                class="nav-link @(ViewBag.activeNavbarItem == "courses" ? "active" : "")">
+                                الدورات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Instructors"
+                                class="nav-link @(ViewBag.activeNavbarItem == "instructors" ? "active" : "")">
+                                المدربين
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="AboutUs"
+                                class="nav-link @(ViewBag.activeNavbarItem == "aboutUs" ? "active" : "")">
+                                من نحن
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <div class="d-block">
+                        <div class="pt-md-1 pt-4 d-flex justify-content-center justify-content-md-end">
+                            <a asp-area="Identity" asp-page="/Account/Login" class="btn py-2 py-md-1 fw-light">
+                                تسجيل الدخول
+                            </a>
+
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary fw-light py-2 px-3 py-md-1 px-md-3">
+                                انضم إلينا
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</nav>

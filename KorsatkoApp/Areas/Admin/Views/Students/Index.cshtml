@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<Student>
+
+@{
+    Layout = "_DatatableAdminLayout";
+}
+
+@section TableHeader {
+    <tr>
+        <th>الاسم بالكامل</th>
+        <th>الجنس</th>
+        <th>رقم الهاتف</th>
+        <th>الرقم القومي</th>
+        <th>تاريخ الميلاد</th>
+        <th>البريد الإلكتروني</th>
+        <th>تاريخ التسجيل</th>
+        <th></th>
+    </tr>
+}
+
+
+@section TableRows {
+	@foreach (var item in Model) {
+		<tr>
+			<td>@item.FullName</td>
+			@if (item.Gender == 'f') {
+				<td>انثى</td>
+			} else {
+				<td>ذكر</td>
+			}
+			<td>@item.PhoneNumber</td>
+			<td>@item.NationalId</td>
+			<td>@item.DateOfBirth.ToString("dd/MM/yyyy")</td>
+			<td>@item.Email</td>
+			<td>@item.AddedOn</td>
+
+			<td class="text-nowrap">
+				<a asp-action="Details" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+					<i class="fas fa-info"></i>
+				</a>
+
+				<a asp-action="Edit" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-primary m-1">
+					<i class="fas fa-edit"></i>
+				</a>
+
+				<a asp-action="Delete" asp-route-id="@item.Id" class="btn icon-btn-sm btn-outline-danger m-1">
+					<i class="fas fa-trash"></i>
+				</a>
+
+			</td>
+		</tr>
+	}
+
+}

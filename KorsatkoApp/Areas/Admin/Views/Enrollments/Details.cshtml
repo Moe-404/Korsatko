@@ -1,0 +1,49 @@
+﻿@model KorsatkoApp.Areas.Admin.Models.Enrollment
+
+@{
+    Layout = "_HeaderAdminLayout";
+}
+
+<div class="card">
+    <div class="card-body arabic">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EnrollmentNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EnrollmentNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PaymentStatus)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PaymentStatus)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.session)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.session.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.student)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.student.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AddedOn)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AddedOn)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="card-footer">
+        <div class="">
+            <a asp-action="Edit" asp-route-id="@Model.EnrollmentNumber" class="btn btn-primary px-3 arabic">تعديل</a>
+            <a asp-action="Index" class="btn btn-secondary px-3 arabic">رجوع</a>
+        </div>
+    </div>
+</div>

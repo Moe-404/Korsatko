@@ -1,0 +1,229 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "التسجيل";
+
+}
+
+<div class="content-wrapper">
+    <div class="fading-bg container-fluid pt-3 pb-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-5 col-xxl-4 mt-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="container-fluid">
+                            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                            <div class="row my-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <img src="/img/k-logo-t.png" class="col-2 col-sm-2">
+                                    <h3 class="color-dark-blue mt-2">إنشاء حساب جديد</h3>
+                                </div>
+                            </div>
+
+                            <fieldset class="row my-4" id="accountDetails">
+                                <label for="accountDetails" class="h5">
+                                    تفاصيل الحساب
+                                </label>
+
+                                <div class="form-group col-12 mt-2">
+                                    <label for="username" class="form-label">اسم المستخدم</label>
+                                    <input asp-for="Input.UserName"  type="text" name="username" id="username"
+                                           class="form-control ltr-right">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.UserName" id="error_username"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 mt-2">
+                                    <label for="email" class="form-label">البريد الاكتروني</label>
+                                    <input asp-for="Input.Email" type="email" name="email" id="email"
+                                           class="form-control ltr-right">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.Email" id="error_email"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-6 mt-2">
+                                    <label for="password" class="form-label">كلمة المرور</label>
+                                    <input asp-for="Input.Password" type="password" name="password" id="password" class="form-control ltr-right">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.Password" id="error_username"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-6 mt-2">
+                                    <label for="confirmPassword" class="form-label">تأكيد كلمة المرور</label>
+                                    <input asp-for="Input.ConfirmPassword" type="password" name="confirmPassword" id="confirmPassword"
+                                           class="form-control ltr-right">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.ConfirmPassword" id="error_confirmPassword"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-text mt-2">
+                                    لديك حساب بالفعل؟
+                                    <a asp-controller="Account" asp-action="Login">تسجيل الدخول</a>.
+                                </div>
+                            </fieldset>
+
+
+                            <fieldset class="row my-4" id="personalInformation">
+                                <label for="personalInformation" class="h5">
+                                    البيانات الشخصية
+                                </label>
+
+                                <div class="form-group col-12 mt-2">
+                                    <label for="fullName" class="form-label">الاسم بالكامل</label>
+                                    <input asp-for="Input.FullName" type="text" name="fullName" id="fullName"
+                                           class="form-control">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.FullName" id="error_fullName"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 mt-2">
+                                    <label for="nationalId" class="form-label">الرقم القومي</label>
+                                    <input asp-for="Input.NationalId" type="text" name="nationalId" id="nationalId"
+                                           class="form-control">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.NationalId" id="error_nationalId"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 mt-2">
+                                    <label for="phonenumber" class="form-label">رقم الهاتف</label>
+                                    <input asp-for="Input.PhoneNumber" type="text" name="phonenumber" id="phonenumber"
+                                           class="form-control">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.PhoneNumber" id="error_phonenumber"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-6 mt-2">
+                                    <label for="gender" class="form-label">النوع</label>
+
+                                    <select asp-for="Input.Gender" name="gender" id="gender" class="form-select">
+                                        <option selected disabled>إختر النوع</option>
+                                        <option value="m">ذكر</option>
+                                        <option value="f">أنثى</option>
+                                    </select>
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.Gender" id="error_gender"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-12 col-sm-6 mt-2">
+                                    <label for="birthDate" class="form-label">تاريخ الميلاد</label>
+                                    <input asp-for="Input.DateOfBirth" type="date" name="birthDate" id="birthDate"
+                                           class="form-control ltr-right"
+                                           placeholder="dd/MM/yyyy" value="2000-01-01">
+
+                                    <div class="form-text text-danger">
+                                        <span asp-validation-for="Input.DateOfBirth" id="error_birthDate"></span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <div class="alert alert-warning">
+                                        <div class="d-flex">
+                                            <div class="d-flex align-items-center ms-1 me-3">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </div>
+
+                                            <div class="form-text">
+                                                بتسجيلك في الموقع أنت توافق على
+                                                <a href="#" class="alert-link">شروط الاستخدام</a>
+                                                و
+                                                <a href="#" class="alert-link">سياسة الخصوصية</a>.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-1 mb-2">
+                                <div class="d-flex justify-content-center">
+                                    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-3">سجل الان</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@* <div class="container">
+    <div class=" ">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>انشئ حساب جديد</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FullName" class="form-control" aria-required="true" />
+                <label class="mb-2" asp-for="Input.FullName"></label>
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
+            </div> 
+            <div class="form-floating mb-3">
+                <input asp-for="Input.UserName" class="form-control" aria-required="true" />
+                <label asp-for="Input.UserName"></label>
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div> 
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Gender" class="form-control" aria-required="true" />
+                <label asp-for="Input.Gender"></label>
+                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" asp-for="Input.DateOfBirth" class="form-control" aria-required="true" />
+                <label asp-for="Input.DateOfBirth"></label>
+                <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.NationalId" class="form-control" aria-required="true" />
+                <label asp-for="Input.NationalId"></label>
+                <span asp-validation-for="Input.NationalId" class="text-danger"></span>
+            </div> 
+
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"  />
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true"  />
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary mb-3">سجل الان</button>
+        </form>
+    </div>
+</div> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
